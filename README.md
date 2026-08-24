@@ -7,3 +7,9 @@ Repositorio con los laboratorios evaluativos, ejercicios de clase y benchmarks d
 - `laboratorios/` — los 5 informes evaluativos (EE1-EE5), uno por carpeta.
 - `ejercicios-clase/` — código de las sesiones prácticas no evaluativas.
 - `benchmarks/` — scripts compartidos de medición de tiempos y graficación.
+
+## Cómo ejecutar
+
+```bash
+python benchmarks/comparar_ordenamientos.py
+```
