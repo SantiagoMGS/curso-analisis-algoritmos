@@ -13,3 +13,7 @@ Repositorio con los laboratorios evaluativos, ejercicios de clase y benchmarks d
 ```bash
 python benchmarks/comparar_ordenamientos.py
 ```
+
+## Autor
+
+- Nombre: Santiago Martínez
