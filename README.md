@@ -4,7 +4,8 @@ Repositorio con los laboratorios evaluativos, ejercicios de clase y benchmarks d
 
 ## Estructura
 
-- `laboratorios/` — los 5 informes evaluativos (EE1-EE5), uno por carpeta.
+- `lab1-fundamentos-complejidad-recurrencias/`, `lab2-...`, etc. — los informes evaluativos (EE1-EE5), cada uno en su propia carpeta en la raíz del repo.
+- `laboratorios/` — guías de los laboratorios no evaluativos (configuración del entorno, etc.).
 - `ejercicios-clase/` — código de las sesiones prácticas no evaluativas.
 - `benchmarks/` — scripts compartidos de medición de tiempos y graficación.
 
