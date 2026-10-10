@@ -1,6 +1,6 @@
 # Laboratorio evaluativo 2 — Dividir y vencer
 
-**Nombre:** Santiago Martínez
+**Nombre:** Santiago Martínez Gutiérrez
 
 ## Cómo reproducir
 

@@ -6,6 +6,7 @@ from subarreglo import subarreglo_fuerza_bruta, subarreglo_maximo
 
 
 def suma_dc(valores: list[float]) -> float:
+    """Devuelve solo la suma que calcula subarreglo_maximo sobre toda la lista."""
     return subarreglo_maximo(valores, 0, len(valores) - 1)[2]
 
 
