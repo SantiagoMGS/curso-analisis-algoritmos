@@ -52,3 +52,17 @@ Valores medidos (mediana de 3 corridas):
 | 2000 | 0,062012 | 0,001525 |
 | 4000 | 0,232381 | 0,002992 |
 | 8000 | 0,917274 | 0,006343 |
+
+---
+
+## Parte 3 — Análisis
+
+**1. Recurrencia.** En `subarreglo_maximo` cada llamada parte la serie en dos mitades y se llama a sí misma una vez por mitad, así que hay 2 subproblemas de tamaño n/2. Además hace el caso cruzado con `suma_cruzada`, que recorre desde el punto medio hacia la izquierda y hacia la derecha, en total a lo sumo n elementos: Θ(n). Elegir el mejor de los tres resultados son un par de comparaciones, Θ(1), que no cambia el orden. Queda T(n) = 2T(n/2) + Θ(n). Con el método maestro: a = 2, b = 2, entonces n^(log₂2) = n. Como f(n) = Θ(n) es del mismo orden que n^(log_b a), se cumple la condición del caso 2 y T(n) = Θ(n log n). La fuerza bruta es Θ(n²) porque tiene dos ciclos anidados: para cada inicio i recorre todos los fines j ≥ i, o sea n + (n−1) + … + 1 = n(n+1)/2 pares, y cada par cuesta una suma y una comparación, trabajo constante.
+
+**2. Lo medido contra lo esperado.** En la gráfica la fuerza bruta sube cada vez más rápido (de 0,06 s en n = 2000 a 0,92 s en n = 8000), mientras que divide y vencerás se ve casi pegada al eje horizontal, llegando apenas a 0,006 s en n = 8000. Al duplicar de 4000 a 8000, el tiempo de la fuerza bruta se multiplicó por 0,917 / 0,232 ≈ 3,95, muy cerca del 4 que predice Θ(n²) (duplicar n multiplica n² por 4). El de divide y vencerás se multiplicó por 0,00634 / 0,00299 ≈ 2,12, y para Θ(n log n) se espera 2 · log₂8000 / log₂4000 ≈ 2,17, así que también coincide. Con 2000 → 4000 pasa lo mismo (3,75 y 1,96).
+
+**3. Tamaños pequeños.** Sí hay un punto de cruce en mi rango. Con n = 10 la fuerza bruta es más rápida (3 µs contra 6 µs), pero con n = 50 divide y vencerás ya gana por poco (27 µs contra 32 µs), y con n = 100 es casi el doble de rápido (57 µs contra 121 µs). Entonces el cruce está entre 10 y 50 días. A tamaños tan chicos pesa más el costo de las llamadas recursivas y de armar tuplas en cada llamada que la ventaja asintótica, por eso la ventaja no se nota desde el principio.
+
+**4. ¿Cuándo conviene dividir?** Para hallar el máximo de un arreglo, dividir por la mitad da T(n) = 2T(n/2) + Θ(1), porque combinar es una sola comparación. Con el método maestro, n^(log₂2) = n y f(n) = Θ(1) es polinomialmente menor, caso 1, así que T(n) = Θ(n). Recorrerlo una vez con un `for` ya es Θ(n), entonces dividir no mejora nada y solo agrega llamadas recursivas. En el subarreglo máximo sí sirve porque la alternativa directa es Θ(n²) y dividir la baja a Θ(n log n), pagando un combinar lineal que sí compensa.
+
+**5. Concepto para la gerente.** Recomiendo divide y vencerás. Con 8000 registros ya es unas 145 veces más rápido (0,0063 s contra 0,92 s) y la diferencia crece con el tamaño. **Esto es una estimación, no una medición.** Para 1.000.000 de registros, n es 125 veces más grande que 8000. La fuerza bruta crece como n², así que tardaría 0,917 · 125² ≈ 14.300 s, unas 4 horas. Divide y vencerás crece como n log n: el factor es 125 · (log₂10⁶ / log₂8000) ≈ 125 · 1,54 ≈ 192, o sea 0,0063 · 192 ≈ 1,2 s. Supongo que el comportamiento sigue la misma forma que medí y que el computador no cambia; con series tan grandes la memoria y el caché pueden mover los números, pero la diferencia de horas contra segundos no cambiaría.
